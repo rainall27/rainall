@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Редактировать аккаунт</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer>
+    document.addEventListener("DOMContentLoaded", function() {
+      const account = JSON.parse(localStorage.getItem("account"));
+      const form = document.getElementById("edit-form");
+      const message = document.getElementById("message");
+      if (!account) {
+        message.textContent = "Аккаунт не создан. Пожалуйста, создайте аккаунт.";
+        form.style.display = "none";
+        return;
+      }
+      // Заполняем текущие данные
+      document.getElementById("username").value = account.username;
+      
+      form.addEventListener("submit", async function(e) {
+        e.preventDefault();
+        const newUsername = document.getElementById("username").value.trim();
+        const newPassword = document.getElementById("new-password").value;
+        const confirm = document.getElementById("confirm-password").value;
+        if (!newUsername) {
+          alert("Никнейм не может быть пустым.");
+          return;
+        }
+        if (newPassword !== confirm) {
+          alert("Новые пароли не совпадают.");
+          return;
+        }
+        // Обновляем данные аккаунта в localStorage
+        const updatedAccount = {
+          username: newUsername,
+          password: newPassword ? newPassword : account.password
+        };
+        localStorage.setItem("account", JSON.stringify(updatedAccount));
+        // Опционально: отправьте данные на сервер для обновления в базе данных
+        alert("Данные аккаунта обновлены!");
+        window.location.href = "index.html";
+      });
+    });
+  </script>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="header-wrapper">
+      <div class="logo">
+        <img src="logo.png" alt="Логотип">
+      </div>
+      <nav>
+        <ul class="menu">
+          <div class="highlighter"></div>
+          <li data-section="about" class="active">О компании</li>
+          <li data-section="company">Компания</li>
+          <li data-section="catalog">Каталог</li>
+        </ul>
+      </nav>
+      <div class="account-menu">
+        <button class="account-button" id="account-btn">Account</button>
+        <div class="account-dropdown" id="account-dropdown">
+          <a href="logout.html">Logout</a>
+          <a href="edit.html">Edit</a>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main>
+    <div class="page-container">
+      <h1>Редактировать аккаунт</h1>
+      <p id="message"></p>
+      <form id="edit-form">
+        <label for="username">Новый никнейм:</label><br>
+        <input type="text" id="username" name="username" required><br>
+        <label for="new-password">Новый пароль (оставьте пустым, если не хотите менять):</label><br>
+        <input type="password" id="new-password" name="new-password"><br>
+        <label for="confirm-password">Подтверждение нового пароля:</label><br>
+        <input type="password" id="confirm-password" name="confirm-password"><br>
+        <button type="submit">Сохранить изменения</button>
+      </form>
+      <p><a href="index.html">Вернуться на главную</a></p>
+    </div>
+  </main>
+</body>
+</html>
