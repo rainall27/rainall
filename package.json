@@ -1,6 +1,16 @@
-git init  # Инициализация Git (если не сделано)
-git remote add origin https://github.com/rainall27/rainall.git
-git branch -M main  # Установить основную ветку
-git add .
-git commit -m "Первый коммит"
-git push -u origin main  # Отправить код на GitHub
+{
+  "name": "your-project-name",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",  // Если используете nodemon для разработки
+    "build": "echo 'no build script' && exit 0"
+  },
+  "dependencies": {
+    // все ваши зависимости
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.0"  // Если используете nodemon
+  }
+}
