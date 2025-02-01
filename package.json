@@ -1,0 +1,6 @@
+git init  # Инициализация Git (если не сделано)
+git remote add origin https://github.com/rainall27/rainall.git
+git branch -M main  # Установить основную ветку
+git add .
+git commit -m "Первый коммит"
+git push -u origin main  # Отправить код на GitHub
