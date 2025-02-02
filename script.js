@@ -43,7 +43,7 @@ if (accountBtn) {
     // Если аккаунт не создан, при клике перенаправляем на страницу создания аккаунта
     accountBtn.addEventListener('click', () => {
       alert("Аккаунт не создан. Пожалуйста, создайте аккаунт.");
-      window.location.href = "create.html";
+      window.location.href = "public/create.html";
     });
   } else {
     // Если аккаунт существует, стандартное поведение
